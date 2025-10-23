@@ -96,6 +96,7 @@ This project implements a comprehensive gold price prediction system using multi
 gold-prediction-model/
 ├── README.md                 # Main documentation
 ├── QUICKSTART.md            # Quick start guide
+├── PROJECT_SUMMARY.md       # Executive summary
 ├── requirements.txt         # Python dependencies
 ├── .gitignore              # Git exclusions
 │
@@ -107,6 +108,7 @@ gold-prediction-model/
 ├── trainer.py             # Training pipeline
 ├── predict.py             # Prediction script
 ├── demo.py                # Complete demonstration
+├── backtest.py            # Backtesting validation
 ├── test_validation.py     # Validation tests
 │
 ├── data/                  # Data storage

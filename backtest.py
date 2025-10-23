@@ -6,7 +6,6 @@ Tests if models can predict current prices from old data.
 
 import numpy as np
 import pandas as pd
-from datetime import datetime, timedelta
 import logging
 
 from data_fetcher import GoldDataFetcher
@@ -133,8 +132,6 @@ def backtest_predictions(cutoff_date='2024-01-01', prediction_days=30):
 
 def main():
     """Run backtest."""
-    import sys
-    
     # Use different cutoff dates for testing
     cutoff_dates = ['2024-01-01', '2024-06-01', '2024-09-01']
     
