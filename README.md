@@ -6,6 +6,8 @@ A comprehensive machine learning system for predicting gold prices using multipl
 
 - **Multiple ML Models**: LSTM, GRU, XGBoost, Prophet, and Ensemble methods
 - **Real-time Data**: Fetches up-to-date gold price data using Yahoo Finance (free API)
+- **GUI Application**: User-friendly graphical interface for easy predictions
+- **Executable Builds**: Pre-built executables for Windows, Linux, and macOS
 - **Advanced Feature Engineering**: 
   - Technical indicators (SMA, EMA, RSI, MACD, Bollinger Bands, ATR, OBV)
   - Price-based features (changes, ranges, gaps)
@@ -43,6 +45,27 @@ pip install -r requirements.txt
 ```
 
 ## 📖 Usage
+
+### GUI Application (Recommended)
+
+The easiest way to use the gold price prediction model is through the graphical user interface:
+
+```bash
+python gui_app.py
+```
+
+The GUI provides:
+- **Current Price Display**: View the latest gold price
+- **Model Loading**: Easily load trained prediction models
+- **Price Predictions**: Get predictions from all models with one click
+- **Visual Results**: See predictions in an organized table
+- **Activity Log**: Monitor operations in real-time
+
+**Using the Executable:**
+
+If you download the pre-built executable from the releases or GitHub Actions artifacts:
+- Windows: Double-click `GoldPredictionModel.exe`
+- Linux/macOS: Run `./GoldPredictionModel` in terminal
 
 ### Training Models
 
@@ -140,6 +163,41 @@ Edit `config.py` to customize:
 - Training configuration
 - Feature engineering parameters
 - Evaluation metrics
+
+## 🏗️ Building Executables
+
+### Automated Builds (GitHub Actions)
+
+The project includes a GitHub Actions workflow that automatically builds executables for Windows, Linux, and macOS on every push or pull request.
+
+**Accessing Built Executables:**
+1. Go to the "Actions" tab in the GitHub repository
+2. Click on the latest "Build Executable with UI" workflow run
+3. Download the artifacts for your platform:
+   - `GoldPredictionModel-Windows` for Windows
+   - `GoldPredictionModel-Linux` for Linux
+   - `GoldPredictionModel-macOS` for macOS
+
+### Manual Build
+
+To build the executable manually on your local machine:
+
+```bash
+# Install PyInstaller if not already installed
+pip install pyinstaller
+
+# Build the executable
+pyinstaller gold_prediction_gui.spec
+
+# The executable will be created in the dist/ directory
+```
+
+**Platform-specific notes:**
+- **Windows**: Creates `dist/GoldPredictionModel.exe`
+- **Linux**: Creates `dist/GoldPredictionModel` (requires `python3-tk` package)
+- **macOS**: Creates `dist/GoldPredictionModel`
+
+The built executable is standalone and includes all necessary dependencies.
 
 ## 📂 Project Structure
 
