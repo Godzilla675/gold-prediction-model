@@ -1,12 +1,43 @@
 # -*- mode: python ; coding: utf-8 -*-
+"""
+PyInstaller spec file for Gold Price Prediction Model GUI application.
+
+This spec file includes special handling for XGBoost native libraries.
+XGBoost requires its native library files (libxgboost.so on Linux, xgboost.dll on Windows)
+to be explicitly included in the PyInstaller bundle, otherwise the built executable
+will fail with "XGBoostLibraryNotFound" error at runtime.
+"""
+import os
+import sys
+from pathlib import Path
 
 block_cipher = None
+
+# Collect XGBoost library files
+# Fix for XGBoost runtime error: "Cannot find XGBoost Library in the candidate path"
+xgboost_libs = []
+try:
+    import xgboost
+    xgb_path = Path(xgboost.__file__).parent
+    lib_path = xgb_path / 'lib'
+    
+    if lib_path.exists():
+        # Collect all library files from xgboost/lib directory
+        # Expected files: libxgboost.so (Linux), xgboost.dll/libxgboost.dll (Windows), libxgboost.dylib (macOS)
+        # These will be placed in xgboost/lib/ in the bundle
+        for lib_file in lib_path.glob('*'):
+            if lib_file.is_file():
+                # Add to binaries with destination in xgboost/lib
+                xgboost_libs.append((str(lib_file), 'xgboost/lib'))
+                print(f"Including XGBoost library: {lib_file.name}")
+except ImportError:
+    print("Warning: XGBoost not found during spec file execution")
 
 # Analysis - collect all necessary files and dependencies
 a = Analysis(
     ['gui_app.py'],
     pathex=[],
-    binaries=[],
+    binaries=xgboost_libs,
     datas=[
         ('config.py', '.'),
         ('predict.py', '.'),
