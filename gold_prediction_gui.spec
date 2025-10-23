@@ -1,12 +1,32 @@
 # -*- mode: python ; coding: utf-8 -*-
+import os
+import sys
+from pathlib import Path
 
 block_cipher = None
+
+# Collect XGBoost library files
+xgboost_libs = []
+try:
+    import xgboost
+    xgb_path = Path(xgboost.__file__).parent
+    lib_path = xgb_path / 'lib'
+    
+    if lib_path.exists():
+        # Collect all library files from xgboost/lib
+        for lib_file in lib_path.glob('*'):
+            if lib_file.is_file():
+                # Add to binaries with destination in xgboost/lib
+                xgboost_libs.append((str(lib_file), 'xgboost/lib'))
+                print(f"Including XGBoost library: {lib_file.name}")
+except ImportError:
+    print("Warning: XGBoost not found during spec file execution")
 
 # Analysis - collect all necessary files and dependencies
 a = Analysis(
     ['gui_app.py'],
     pathex=[],
-    binaries=[],
+    binaries=xgboost_libs,
     datas=[
         ('config.py', '.'),
         ('predict.py', '.'),
