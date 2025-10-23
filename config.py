@@ -29,10 +29,10 @@ FORECAST_HORIZON = 1  # Predict 1 day ahead
 ACCURACY_THRESHOLD = 0.90  # 90% accuracy requirement
 
 # Training configuration
-EPOCHS = 100
+EPOCHS = 50  # Reduced for faster testing
 BATCH_SIZE = 32
 LEARNING_RATE = 0.001
-EARLY_STOPPING_PATIENCE = 15
+EARLY_STOPPING_PATIENCE = 10  # Reduced for faster testing
 
 # Feature engineering
 TECHNICAL_INDICATORS = [

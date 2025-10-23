@@ -183,7 +183,7 @@ class XGBoostModel(BaseModel):
     def __init__(self, name="XGBoost"):
         super().__init__(name)
         self.model = xgb.XGBRegressor(
-            n_estimators=1000,
+            n_estimators=500,
             learning_rate=0.01,
             max_depth=7,
             min_child_weight=1,
@@ -191,7 +191,8 @@ class XGBoostModel(BaseModel):
             colsample_bytree=0.8,
             objective='reg:squarederror',
             random_state=42,
-            n_jobs=-1
+            n_jobs=-1,
+            early_stopping_rounds=50
         )
         
     def train(self, X_train, y_train, X_val, y_val):
@@ -201,7 +202,6 @@ class XGBoostModel(BaseModel):
         self.model.fit(
             X_train, y_train,
             eval_set=[(X_val, y_val)],
-            early_stopping_rounds=50,
             verbose=False
         )
         

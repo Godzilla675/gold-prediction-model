@@ -285,6 +285,15 @@ class ModelTrainer:
         logger.info("Saving all models...")
         for model_name, model in self.models.items():
             model.save()
+        
+        # Save scalers
+        import joblib
+        scaler_path_X = MODELS_DIR / "scaler_X.joblib"
+        scaler_path_y = MODELS_DIR / "scaler_y.joblib"
+        joblib.dump(self.scaler_X, scaler_path_X)
+        joblib.dump(self.scaler_y, scaler_path_y)
+        logger.info(f"Scalers saved to {MODELS_DIR}")
+        
         logger.info("All models saved successfully")
         
     def generate_report(self):
