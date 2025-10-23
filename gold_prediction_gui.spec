@@ -23,6 +23,7 @@ try:
     
     if lib_path.exists():
         # Collect all library files from xgboost/lib directory
+        # Expected files: libxgboost.so (Linux), xgboost.dll/libxgboost.dll (Windows), libxgboost.dylib (macOS)
         # These will be placed in xgboost/lib/ in the bundle
         for lib_file in lib_path.glob('*'):
             if lib_file.is_file():
